@@ -6,7 +6,85 @@
     <title>Nuvela</title>
     <link rel="stylesheet" type="text/css" href="build/css/style.css" />
   </head>
-  <body>
-    Nuvela :)
-  </body>
+<body>
+  <div id="main">
+    <div id="player"></div>
+
+    <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+
+      var currentVid = 0;
+
+      var list = [
+        {
+          id: "wV6rwIrAMCk",
+          start: 30,
+          end: 33
+        },{
+          id: "BqY89j-hGPw",
+          start: 60,
+          end: 63
+        },{
+          id: "SbufgqXoSgU",
+          start: 90,
+          end: 93
+        }
+      ];
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          videoId: list[currentVid].id,
+          playerVars: {
+            controls: 0,
+            disablekb: 1,
+            showinfo: 0,
+            start: list[currentVid].start
+          },
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.playVideo();
+        if (player.getPlayerState() == 1) {
+          console.log(1);
+          setInterval(changeVideo, 1000);
+        } else {
+          console.log(2);
+          unloadVideo();
+        }
+      }
+
+      function changeVideo() {
+        var currentTime = parseInt(player.getCurrentTime());
+        console.log(player.getPlayerState());
+
+        if (currentTime >= list[currentVid].end) {
+          unloadVideo();
+          currentVid = (currentVid < list.length - 1) ? currentVid + 1 : 0;
+          loadVideo(list[currentVid].id, list[currentVid].start);
+        }
+      }
+
+      function loadVideo(id, start) {
+        player.loadVideoById({
+          videoId: id,
+          startSeconds: start
+        }).playVideo();
+      }
+
+      function unloadVideo() {
+        clearInterval(changeVideo);
+      }
+    </script>
+  </div>
+</body>
 </html>

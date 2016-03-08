@@ -1,7 +1,3 @@
 @import 'reset';
 @import 'variables';
-
-body {
-	background-color: $black;
-	color: $white;
-}
+@import 'main';
