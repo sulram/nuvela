@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nuvela</title>
-    <link rel="stylesheet" type="text/css" href="build/css/style.css" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nuvela</title>
+  <link rel="stylesheet" type="text/css" href="build/css/style.css" />
+</head>
 <body>
   <div id="main">
     <div id="player"></div>
@@ -18,7 +18,7 @@
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       var player;
-
+      var interval;
       var currentVid = 0;
 
       var list = [
@@ -47,42 +47,38 @@
             start: list[currentVid].start
           },
           events: {
-            'onReady': onPlayerReady
+            'onReady': onPlayerReady,
+            'onStateChange': onStatChange
           }
         });
       }
 
-      function onPlayerReady(event) {
-        event.target.playVideo();
+      function onPlayerReady() {
+        player.playVideo().mute();
+      }
+
+      function onStatChange() {
         if (player.getPlayerState() == 1) {
-          console.log(1);
-          setInterval(changeVideo, 1000);
+          interval = setInterval(playVid, 1000);
         } else {
-          console.log(2);
-          unloadVideo();
+          clearInterval(interval);
         }
       }
 
-      function changeVideo() {
+      function playVid() {
         var currentTime = parseInt(player.getCurrentTime());
-        console.log(player.getPlayerState());
 
         if (currentTime >= list[currentVid].end) {
-          unloadVideo();
           currentVid = (currentVid < list.length - 1) ? currentVid + 1 : 0;
-          loadVideo(list[currentVid].id, list[currentVid].start);
+          loadVid(list[currentVid].id, list[currentVid].start);
         }
       }
 
-      function loadVideo(id, start) {
+      function loadVid(id, start) {
         player.loadVideoById({
           videoId: id,
           startSeconds: start
-        }).playVideo();
-      }
-
-      function unloadVideo() {
-        clearInterval(changeVideo);
+        }).playVideo().mute();
       }
     </script>
   </div>
