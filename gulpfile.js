@@ -16,8 +16,21 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./build/css'));
 });
 
-gulp.task( 'default', ['sass'] );
+gulp.task('js', function () {
+  gulp.src([
+    './node_modules/jquery/dist/jquery.js',
+    './node_modules/jquery-form/jquery.form.js',
+    './js/**/*.js'
+  ])
+  .pipe(sourcemaps.init())
+  .pipe(concat('script.js'))
+  .pipe(sourcemaps.write('./'))
+  .pipe(gulp.dest('./build/js'));
+});
+
+gulp.task('default', ['sass', 'js']);
 
 gulp.task( 'watch', ['default'], function () {
-	gulp.watch( './scss/**/*.scss', ['sass'] );
+  gulp.watch( './scss/**/*.scss', ['sass'] );
+	gulp.watch( './js/**/*.scss', ['js'] );
 });
