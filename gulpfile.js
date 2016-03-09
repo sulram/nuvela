@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var concat = require('gulp-concat');
 
 gulp.task('sass', function () {
   gulp.src('./scss/style.scss')
@@ -32,5 +33,5 @@ gulp.task('default', ['sass', 'js']);
 
 gulp.task( 'watch', ['default'], function () {
   gulp.watch( './scss/**/*.scss', ['sass'] );
-	gulp.watch( './js/**/*.scss', ['js'] );
+	gulp.watch( './js/**/*.js', ['js'] );
 });

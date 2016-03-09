@@ -22,6 +22,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
+    "jquery": "^2.2.1",
     "jquery-form": "^3.50.0"
   }
 }
