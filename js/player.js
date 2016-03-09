@@ -27,25 +27,47 @@
 
   $.getJSON(sheetUrl, function(data) {
     var entry = data.feed.entry;
+    var currentId;
+    var currentStart;
+    var currentEnd;
+    var rEx = /^\d+:[0-5]\d$/;
 
     $(entry).each(function() {
+      currentId = this.gsx$videoid.$t;
+      currentStart = this.gsx$start.$t;
+      currentEnd = this.gsx$end.$t;
 
-      videoList.push({
-        'id': this.gsx$videoid.$t,
-        'start': parseInt(this.gsx$start.$t),
-        'end': parseInt(this.gsx$end.$t)
-      });
+      // Verifica se o ID do vídeo do YouTube não é 'null' e nem string vazia
+      if (currentId != null && currentId != '') {
+
+        // Verifica se o tempo inicial não é 'null', nem string vazia e não respeita o formato ...MM:SS
+        if (currentStart != null && currentStart != '' && rEx.test(currentStart)) {
+          currentStart = changeToSecond(currentStart);
+
+          // Verifica se o tempo final não é 'null', nem string vazia e não respeita o formato ...MM:SS
+          if (currentEnd != null && currentEnd != '' && rEx.test(currentEnd)) {
+            currentEnd = changeToSecond(currentEnd);
+
+            videoList.push({
+              'id': currentId,
+              'start': currentStart,
+              'end': currentEnd
+            });
+          }
+        }
+      }
     });
 
     doneList = true;
     setup();
   });
 
+  // Quando a API for carregada, cria o player de vídeo
   window.onYouTubeIframeAPIReady = function() {
     player = new YT.Player('player', {
       videoId: '',
       playerVars: {
-        controls: 0,
+        controls: 1,
         disablekb: 1,
         showinfo: 0,
         start: 0
@@ -92,6 +114,13 @@
       loadVid(videoList[currentVid].id, videoList[currentVid].start);
       started = true;
     }
+  }
+
+  // Converte o tempo no formato ...MM:SS em inteiro e tempo equivalente em segundos
+  function changeToSecond(time) {
+    var str = time.split(':')
+
+    return (parseInt(str[0]) * 60) + parseInt(str[1]);
   }
 
 })();
