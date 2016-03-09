@@ -1,4 +1,4 @@
-//;(function() {
+;(function() {
 
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -25,7 +25,8 @@
     }
   ];
 
-  function onYouTubeIframeAPIReady() {
+  // Making public the start function of YouTube API
+  window.onYouTubeIframeAPIReady = function() {
     player = new YT.Player('player', {
       videoId: list[currentVid].id,
       playerVars: {
@@ -69,4 +70,6 @@
     }).playVideo().mute();
   }
 
-//})();
+  console.log(player);
+
+})();
