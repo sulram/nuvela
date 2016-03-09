@@ -1,15 +1,64 @@
 #main {
   background: $black;
   color: $white;
+  height: 100vh;
   position: relative;
+  width: 100vw;
 
   #player {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
-    width: 100vw;
-    height: 100vh;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  #logo {
+    position: absolute;
+    right: calc-responsive(10, 60);
+    top: calc-responsive(10, 60);
+    z-index: 1;
+
+    img {
+      display: block;
+      height: auto;
+      width: calc-responsive(32, 162);
+    }
+  }
+
+  #nav {
+    bottom: calc-responsive(20, 30);
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+    .btn {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 100%;
+      border: 2px solid $white;
+      cursor: pointer;
+      display: block;
+      height: calc-responsive(36, 54);
+      line-height: 0;
+      margin: 0 auto;
+      outline: none;
+      text-align: center;
+      width: calc-responsive(36, 54);
+
+      &.more {
+        transform: rotate(0);
+      }
+
+      &.close {
+        transform: rotate(45deg);
+      }
+
+      img {
+        height: auto;
+        width: calc-responsive(14, 21);
+      }
+    }
   }
 }
