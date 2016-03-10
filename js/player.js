@@ -126,7 +126,7 @@
     player.loadVideoById({
       videoId: id,
       startSeconds: start
-    }).playVideo();//.mute();
+    }).playVideo().mute();
   }
 
   function setup() {
