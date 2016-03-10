@@ -67,7 +67,7 @@
     player = new YT.Player('player', {
       videoId: '',
       playerVars: {
-        controls: 1,
+        controls: 0,
         disablekb: 1,
         showinfo: 0,
         start: 0
@@ -85,8 +85,11 @@
   }
 
   function onStatChange() {
-    if (player.getPlayerState() == 1) {
+    if (player.getPlayerState() == YT.PlayerState.PLAYING) {
       interval = setInterval(playVid, 500);
+
+      // Remover o load quando o vídeo for carregado
+      $('.nuvela-load').addClass('hide');
     } else {
       clearInterval(interval);
     }
@@ -102,10 +105,13 @@
   }
 
   function loadVid(id, start) {
+    // Mostar o load toda vez que um video for carregado
+    $('.nuvela-load').removeClass('hide');
+
     player.loadVideoById({
       videoId: id,
       startSeconds: start
-    }).playVideo().mute();
+    }).playVideo();//.mute();
   }
 
   function setup() {
