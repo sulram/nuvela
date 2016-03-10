@@ -31,6 +31,7 @@
     var currentStart;
     var currentEnd;
     var rEx = /^\d+:[0-5]\d$/;
+    var qtyResults;
 
     $(entry).each(function() {
       currentId = this.gsx$videoid.$t;
@@ -57,6 +58,20 @@
         }
       }
     });
+
+    // Conta quantos ID do YouTube tem no Google Drive
+    qtyResults = videoList.length;
+
+    while (qtyResults > 0) {
+      var i = Math.floor(Math.random() * qtyResults);
+
+      qtyResults--;
+
+      // Troca o último elmento por esse
+      var shuffled = videoList[qtyResults];
+      videoList[qtyResults] = videoList[i]
+      videoList[i] = shuffled;
+    }
 
     doneList = true;
     setup();
