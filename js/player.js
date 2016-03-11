@@ -39,7 +39,7 @@
       currentEnd = this.gsx$end.$t;
 
       // Verifica se o ID do vídeo do YouTube não é 'null' e nem string vazia
-      if ( currentId ) {
+      if ( currentId.length == 11 ) {
 
         // Verifica se o Tempo Inicial não é 'null', nem string vazia e não respeita o formato ...MM:SS
         if ( currentStart && checkRegExp(currentStart) ) {
