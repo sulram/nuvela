@@ -81,7 +81,8 @@
       },
       events: {
         'onReady': onPlayerReady,
-        'onStateChange': onStatChange
+        'onStateChange': onStatChange,
+        'onError': nextVideo
       }
     });
   }
@@ -103,13 +104,16 @@
   }
 
   function playVid() {
-    console.log(player.getPlayerState());
     var currentTime = parseInt(player.getCurrentTime());
 
     if (currentTime >= videoList[currentVid].end) {
-      currentVid = (currentVid < videoList.length - 1) ? currentVid + 1 : 0;
-      loadVid(videoList[currentVid].id, videoList[currentVid].start);
+      nextVideo();
     }
+  }
+
+  function nextVideo() {
+    currentVid = (currentVid < videoList.length - 1) ? currentVid + 1 : 0;
+    loadVid(videoList[currentVid].id, videoList[currentVid].start);
   }
 
   function loadVid(id, start) {
