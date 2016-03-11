@@ -30,7 +30,7 @@
     var currentId;
     var currentStart;
     var currentEnd;
-    var rEx = /^\d+:[0-5]\d$/;
+    
     var qtyResults;
 
     $(entry).each(function() {
@@ -39,39 +39,31 @@
       currentEnd = this.gsx$end.$t;
 
       // Verifica se o ID do vídeo do YouTube não é 'null' e nem string vazia
-      if (currentId != null && currentId != '') {
+      if ( currentId ) {
 
-        // Verifica se o tempo inicial não é 'null', nem string vazia e não respeita o formato ...MM:SS
-        if (currentStart != null && currentStart != '' && rEx.test(currentStart)) {
-          currentStart = changeToSecond(currentStart);
+        // Verifica se o Tempo Inicial não é 'null', nem string vazia e não respeita o formato ...MM:SS
+        if ( currentStart && checkRegExp(currentStart) ) {
+          currentStart = toSecond(currentStart);
 
-          // Verifica se o tempo final não é 'null', nem string vazia e não respeita o formato ...MM:SS
-          if (currentEnd != null && currentEnd != '' && rEx.test(currentEnd)) {
-            currentEnd = changeToSecond(currentEnd);
+          // Verifica se o Tempo Final não é 'null', nem string vazia e não respeita o formato ...MM:SS
+          if (currentEnd && checkRegExp(currentEnd) ) {
+            currentEnd = toSecond(currentEnd);
 
-            videoList.push({
-              'id': currentId,
-              'start': currentStart,
-              'end': currentEnd
-            });
+            // Verifica se o Tempo Final é maior que o Tempo Inicial
+            if (currentEnd > currentStart) {
+              videoList.push({
+                'id': currentId,
+                'start': currentStart,
+                'end': currentEnd
+              });
+            }
           }
         }
       }
     });
 
-    // Conta quantos ID do YouTube tem no Google Drive
-    qtyResults = videoList.length;
-
-    while (qtyResults > 0) {
-      var i = Math.floor(Math.random() * qtyResults);
-
-      qtyResults--;
-
-      // Troca o último elmento por esse
-      var shuffled = videoList[qtyResults];
-      videoList[qtyResults] = videoList[i]
-      videoList[i] = shuffled;
-    }
+    // Embaralha a lista de vídeos validados vinda do Google Drive
+    shuffleList(videoList);
 
     doneList = true;
     setup();
@@ -111,6 +103,7 @@
   }
 
   function playVid() {
+    console.log(player.getPlayerState());
     var currentTime = parseInt(player.getCurrentTime());
 
     if (currentTime >= videoList[currentVid].end) {
@@ -138,10 +131,32 @@
   }
 
   // Converte o tempo no formato ...MM:SS em inteiro e tempo equivalente em segundos
-  function changeToSecond(time) {
+  function toSecond(time) {
     var str = time.split(':')
 
     return (parseInt(str[0]) * 60) + parseInt(str[1]);
+  }
+
+  function checkRegExp(time) {
+    var rEx = /^\d+:[0-5]\d$/;
+
+    return rEx.test(time);
+  }
+
+  function shuffleList(list) {
+    // Conta quantos ID do YouTube tem no Google Drive
+    var qtyResults = list.length;
+
+    while (qtyResults) {
+      var i = Math.floor(Math.random() * qtyResults);
+
+      qtyResults--;
+
+      // Troca o último elmento por esse
+      var shuffled = list[qtyResults];
+      list[qtyResults] = list[i]
+      list[i] = shuffled;
+    }
   }
 
 })();
