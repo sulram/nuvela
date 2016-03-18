@@ -1,0 +1,53 @@
+@keyframes show-menu {
+  0% {
+    transform: translateY(200px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hide-menu {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(200px);
+  }
+}
+
+@keyframes close-btn {
+  0% {
+    transform: translate(-50%, 0);
+  }
+  100% {
+    transform: translate(-50%, -140px);
+  }
+}
+
+@keyframes more-btn {
+  0% {
+    transform: translate(-50%, -140px);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes close-img {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes more-img {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}

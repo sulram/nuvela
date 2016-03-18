@@ -4,6 +4,7 @@
   height: 100vh;
   position: relative;
   width: 100vw;
+  overflow: hidden;
 
   #player {
     bottom: 0;
@@ -61,16 +62,27 @@
     z-index: 3;
 
     &.close {
-      transform: translate(-50%, -140px);
+      animation: close-btn 1s ease;
+      animation-fill-mode: forwards;
 
       img {
-        transform: rotate(45deg);
+        animation: close-img 0.4s;
+        animation-fill-mode: forwards;
       }
     }
 
+    &.more {
+      animation: more-btn 0.5s ease;
+      animation-fill-mode: forwards;
+
+      img {
+        animation: more-img 0.2s ease;
+        animation-fill-mode: forwards;
+      }
+    }    
+
     img {
       height: auto;
-      transform: rotate(0);
       width: calc-responsive(14, 21);
     }
   }
@@ -82,11 +94,25 @@
       rgba(0, 0, 0, 0.9) 20%,
       rgba(0, 0, 0, 1) 100%);
     bottom: 0;
+    display: none;
     height: 200px;
     left: 0;
     position: absolute;
     width: 100%;
     z-index: 2;
+    transform: translateY(200px);
+
+    &.active {
+      display: inherit;
+      animation: show-menu 1s ease;
+      animation-fill-mode: forwards;
+    }
+
+    &.inactive {
+      display: inherit;
+      animation: hide-menu 0.5s ease;
+      animation-fill-mode: initial;
+    }
 
     .title {
       font-family: 'Roboto', sans-serif;
@@ -121,25 +147,26 @@
           margin-right: 28px;
         }
 
-        button {
+        a {
+          align-items: center;
           background: $black;
           border-radius: 5px;
           border: 1px solid $white;
           color: $white;
-          display: block;
+          display: flex;
+          flex-direction: row;
           font-family: 'Roboto', sans-serif;
           font-size: 12px;
           font-weight: normal;
           height: 40px;
+          justify-content: space-around;
           padding: 0;
+          text-decoration: none;
           text-transform: uppercase;
           width: 200px;
 
           &.back {
             box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
             padding: 0 8px;
 
             img {

@@ -16,6 +16,7 @@
   var doneList = false;
   var doneYT = false;
 
+  var showMenuFirstTime = true;
   // URL da planilha
   var sheetId = '1vnzlSBVUoT9aARJzQPNosx3eTPhFJNKr3G_G3XDV-w8';
 
@@ -163,4 +164,19 @@
     }
   }
 
+  // Evento de click no botão Menu
+  $('#menu-btn').click(function() {
+    var menu = $('#menu');
+    var menuButton = $('#menu-btn');
+
+    if (showMenuFirstTime) {
+      menu.addClass('active');
+      menuButton.addClass('close');
+      showMenuFirstTime = false;
+      return;
+    }
+
+    menu.toggleClass('active inactive');
+    menuButton.toggleClass('close more');
+  });
 })();
