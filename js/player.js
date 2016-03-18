@@ -16,6 +16,7 @@
   var mute = false;
   var doneList = false;
   var doneYT = false;
+  var endOpening = false;
 
   // URL da planilha
   var sheetId = '1vnzlSBVUoT9aARJzQPNosx3eTPhFJNKr3G_G3XDV-w8';
@@ -25,6 +26,19 @@
 
   // Lista de videos
   var videoList = new Array();
+
+  // Quando carregada a página, começa a abertura
+  $(window).ready(function() {
+    $('#opening').addClass('start');
+
+    // Quando terminar o CSS Animation remove o elemento;
+    $('#opening').bind('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function() {
+      $('#opening').remove();
+
+      endOpening = true;
+      setup();
+    });
+  });
 
   $.getJSON( sheetUrl, function( data ) {
     var entry = data.feed.entry;
@@ -77,12 +91,16 @@
       {
         videoId: '',
         playerVars: {
+          autoplay: 0,
           controls: 0,
           disablekb: 1,
-          showinfo: 0,
-          start: 0,
           enablejsapi: 1,
+          fs: 0,
+          hl: 'pt',
+          iv_load_policy: 3,
           origin: 'http://www.upac.com.br/nuvela',
+          rel: 0,
+          showinfo: 0
       },
       events: {
         'onReady': onPlayerReady,
@@ -137,8 +155,8 @@
   }
 
   function setup() {
-    // Se o player do YouTube e lista do Google Drive foram criadas, play nos vídeos
-    if ( doneYT && doneList && !started ) {
+    // Se o player do YouTube, lista do Google Drive foram criadas e a Abertura acabou, play nos vídeos
+    if ( doneYT && doneList && endOpening && !started ) {
       loadVid( videoList[currentVid].id, videoList[currentVid].start );
       started = true;
     }
