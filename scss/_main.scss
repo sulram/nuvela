@@ -20,7 +20,7 @@
     position: absolute;
     right: calc-responsive(10, 60);
     top: calc-responsive(10, 60);
-    z-index: 2;
+    z-index: 3;
 
     img {
       display: block;
@@ -43,6 +43,29 @@
     }
   }
 
+  .mute {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: none;
+
+    &.mute-icon {
+      background: url($img-path + 'mute-icon.svg') no-repeat center center;
+      background-size: 450px 420px;
+      animation: mute-fadeout 0.5s 1s;
+      animation-fill-mode: forwards;
+    }
+
+    &.sound-icon {
+      background: url($img-path + 'sound-icon.svg') no-repeat center center;
+      background-size: 450px 420px;
+      animation: sound-fadeout 0.5s 1s;
+      animation-fill-mode: forwards;
+    }
+  }
+
   #menu-btn {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 100%;
@@ -59,7 +82,7 @@
     text-align: center;
     transform: translate(-50%, 0);
     width: calc-responsive(36, 54);
-    z-index: 3;
+    z-index: 4;
 
     &.close {
       animation: close-btn 1s ease;
@@ -99,7 +122,7 @@
     left: 0;
     position: absolute;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
     transform: translateY(200px);
 
     &.active {
