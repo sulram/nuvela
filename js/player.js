@@ -80,7 +80,9 @@
           controls: 0,
           disablekb: 1,
           showinfo: 0,
-          start: 0
+          start: 0,
+          enablejsapi: 1,
+          origin: 'http://www.upac.com.br/nuvela',
       },
       events: {
         'onReady': onPlayerReady,
