@@ -21,6 +21,12 @@
     right: calc-responsive(10, 60);
     top: calc-responsive(10, 60);
     z-index: 3;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+
+    &.opaque {
+      opacity: 1;
+    }
 
     img {
       display: block;
@@ -85,21 +91,21 @@
     z-index: 4;
 
     &.close {
-      animation: close-btn 1s ease;
+      animation: close-btn 0.5s ease;
       animation-fill-mode: forwards;
 
       img {
-        animation: close-img 0.4s;
+        animation: close-img 0.5s;
         animation-fill-mode: forwards;
       }
     }
 
     &.more {
-      animation: more-btn 0.5s ease;
+      animation: more-btn 0.25s ease;
       animation-fill-mode: forwards;
 
       img {
-        animation: more-img 0.2s ease;
+        animation: more-img 0.35s ease;
         animation-fill-mode: forwards;
       }
     }    
@@ -127,13 +133,13 @@
 
     &.active {
       display: inherit;
-      animation: show-menu 1s ease;
+      animation: show-menu 0.5s ease;
       animation-fill-mode: forwards;
     }
 
     &.inactive {
       display: inherit;
-      animation: hide-menu 0.5s ease;
+      animation: hide-menu 0.25s ease;
       animation-fill-mode: initial;
     }
 

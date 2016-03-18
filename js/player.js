@@ -184,16 +184,19 @@
   $( '#menu-btn' ).click(function() {
     var menu = $( '#menu' );
     var menuButton = $( '#menu-btn' );
+    var logo = $( '#logo' );
 
     if ( showMenuFirstTime ) {
       menu.addClass( 'active' );
       menuButton.addClass( 'close' );
+      logo.addClass( 'opaque' );
       showMenuFirstTime = false;
       return;
     }
 
     menu.toggleClass( 'active inactive' );
     menuButton.toggleClass( 'close more' );
+    logo.toggleClass( 'opaque' );
   });
 
   // Evento de click Mute

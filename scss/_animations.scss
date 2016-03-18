@@ -39,16 +39,16 @@
     transform: rotate(0);
   }
   100% {
-    transform: rotate(45deg);
+    transform: rotate(225deg);
   }
 }
 
 @keyframes more-img {
   0% {
-    transform: rotate(45deg);
+    transform: rotate(225deg);
   }
   100% {
-    transform: rotate(0);
+    transform: rotate(450deg);
   }
 }
 
