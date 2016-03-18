@@ -17,6 +17,7 @@
   var doneYT = false;
 
   var showMenuFirstTime = true;
+
   // URL da planilha
   var sheetId = '1vnzlSBVUoT9aARJzQPNosx3eTPhFJNKr3G_G3XDV-w8';
 
@@ -97,8 +98,11 @@
     if (player.getPlayerState() == YT.PlayerState.PLAYING) {
       interval = setInterval(playVid, 500);
 
+      setDataVideo();
+
       // Remover o load quando o vídeo for carregado
       $('.nuvela-load').addClass('hide');
+      $('#menu .title').removeClass('hidden');
     } else {
       clearInterval(interval);
     }
@@ -115,11 +119,13 @@
   function nextVideo() {
     currentVid = (currentVid < videoList.length - 1) ? currentVid + 1 : 0;
     loadVid(videoList[currentVid].id, videoList[currentVid].start);
+    //$('#menu .title .name').text();
   }
 
   function loadVid(id, start) {
     // Mostar o load toda vez que um video for carregado
     $('.nuvela-load').removeClass('hide');
+    $('#menu .title').addClass('hidden');
 
     player.loadVideoById({
       videoId: id,
@@ -164,6 +170,15 @@
     }
   }
 
+  // Inseri o Título e URL pra link externo do Vídeo
+  function setDataVideo() {
+    var title = player.getVideoData().title;
+    var videoUrl = 'https://www.youtube.com/embed/' + videoList[currentVid].id + '?autohide=1&autoplay=1&cc_load_policy=0&color=white&controls=2&h1=por&iv_load_policy=3&rel=0';
+
+    $('#menu .title .name').text(title);
+    $('#menu .nav .watch').attr('href', videoUrl);
+  }
+
   // Evento de click no botão Menu
   $('#menu-btn').click(function() {
     var menu = $('#menu');
@@ -179,4 +194,7 @@
     menu.toggleClass('active inactive');
     menuButton.toggleClass('close more');
   });
+
+
+
 })();

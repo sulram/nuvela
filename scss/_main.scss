@@ -119,10 +119,17 @@
       font-size: 16px;
       font-weight: normal;
       margin-top: 50px;
+      opacity: 1;
       text-align: center;
+      transition: opacity 0.15s ease;
+
+      &.hidden {
+        opacity: 0;
+      }
 
       .name {
         font-weight: bold;
+        text-transform: uppercase;
 
         &:before {
           content: '“';
