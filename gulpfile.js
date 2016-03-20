@@ -23,7 +23,6 @@ gulp.task('sass', function () {
 gulp.task('js', function () {
   gulp.src([
     './node_modules/jquery/dist/jquery.js',
-    './node_modules/jquery-form/jquery.form.js',
     './js/**/*.js'
   ])
   .pipe(sourcemaps.init())
