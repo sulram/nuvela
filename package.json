@@ -4,14 +4,16 @@
   "description": "Nuvela",
   "main": "index.html",
   "scripts": {
-    "watch": "node ./node_modules/gulp/bin/gulp.js watch"
+    "watch": "node ./node_modules/gulp/bin/gulp.js watch",
+    "build": "node ./node_modules/gulp/bin/gulp.js build",
+    "production": "node ./node_modules/gulp/bin/gulp.js production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/grama-cc/nuvela.git"
   },
   "author": "Grama",
-  "license": "CC-BY-SA",
+  "license": "CC-BY-SA-4.0",
   "bugs": {
     "url": "https://github.com/grama-cc/nuvela/issues"
   },
@@ -20,9 +22,10 @@
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
+    "gulp-minify-css": "^1.2.4",
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
-    "jquery": "^2.2.1",
-    "jquery-form": "^3.50.0"
+    "gulp-uglify": "^1.5.3",
+    "jquery": "^2.2.1"
   }
 }
