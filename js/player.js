@@ -124,6 +124,9 @@
       // Remover o load quando o vídeo for carregado
       $( '.nuvela-load' ).addClass( 'hide' );
       $( '#menu .title' ).removeClass( 'hidden' );
+    } else if ( player.getPlayerState() == YT.PlayerState.ENDED ) {
+      // Chamar o próximo vídeo caso o vídeo atual chegue no fim
+      nextVideo();
     } else {
       clearInterval( interval );
     }
