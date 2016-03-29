@@ -106,19 +106,18 @@
   #menu-btn {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 100%;
-    border: 2px solid $white;
+    border: calc-responsive(2, 3) solid $white;
     bottom: calc-responsive(20, 30);
+    box-sizing: border-box;
     cursor: pointer;
     display: block;
-    height: calc-responsive(36, 54);
     left: 50%;
     line-height: 0;
-    margin: 0 auto;
     outline: none;
+    padding: calc-responsive(11, 18);
     position: absolute;
     text-align: center;
     transform: translate(-50%, 0);
-    width: calc-responsive(36, 54);
     z-index: 4;
 
     &.close {
@@ -143,7 +142,7 @@
 
     img {
       height: auto;
-      width: calc-responsive(14, 21);
+      width: calc-responsive(14, 20);
     }
   }
 
