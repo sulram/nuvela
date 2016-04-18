@@ -110,6 +110,16 @@
     });
   }
 
+  // Play no vídeo quando for focus na tela
+  function onFocus() {
+    player.playVideo();
+  }
+
+  // Pause no vídeo quando for blur na tela
+  function onBlur() {
+    player.pauseVideo();
+  }
+
   function onPlayerReady() {
     doneYT = true;
     setup();
@@ -143,7 +153,6 @@
   function nextVideo() {
     currentVid = ( currentVid < videoList.length - 1 ) ? currentVid + 1 : 0;
     loadVid( videoList[currentVid].id, videoList[currentVid].start );
-    //$('#menu .title .name').text();
   }
 
   function loadVid( id, start ) {
@@ -161,6 +170,10 @@
     // Se o player do YouTube, lista do Google Drive foram criadas e a Abertura acabou, play nos vídeos
     if ( doneYT && doneList && endOpening && !started ) {
       loadVid( videoList[currentVid].id, videoList[currentVid].start );
+
+      $(window).blur(onBlur);
+      $(window).focus(onFocus);
+
       started = true;
     }
   }
@@ -198,7 +211,6 @@
   function setDataVideo() {
     var title = player.getVideoData().title;
     var videoUrl = 'https://www.youtube.com/watch?v=' + videoList[currentVid].id;
-    //var videoUrl = 'https://www.youtube.com/embed/' + videoList[currentVid].id + '?autohide=1&autoplay=1&cc_load_policy=0&color=white&controls=2&hl=por&iv_load_policy=3&rel=0';
 
     $( '#menu .title .name' ).text( title );
     $( '#menu .nav .watch' ).attr( 'href', videoUrl );
