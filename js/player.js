@@ -197,7 +197,8 @@
   // Inseri o Título e URL pra link externo do Vídeo
   function setDataVideo() {
     var title = player.getVideoData().title;
-    var videoUrl = 'https://www.youtube.com/embed/' + videoList[currentVid].id + '?autohide=1&autoplay=1&cc_load_policy=0&color=white&controls=2&hl=por&iv_load_policy=3&rel=0';
+    var videoUrl = 'https://www.youtube.com/watch?v=' + videoList[currentVid].id;
+    //var videoUrl = 'https://www.youtube.com/embed/' + videoList[currentVid].id + '?autohide=1&autoplay=1&cc_load_policy=0&color=white&controls=2&hl=por&iv_load_policy=3&rel=0';
 
     $( '#menu .title .name' ).text( title );
     $( '#menu .nav .watch' ).attr( 'href', videoUrl );
