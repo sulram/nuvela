@@ -1,4 +1,4 @@
-	![](https://github.com/grama-cc/nuvela/blob/master/assets/images/share.png?raw=true)
+![](https://github.com/grama-cc/nuvela/blob/master/assets/images/share.png?raw=true)
 
 A **[NUVELA](http://upac.com.br/nuvela)** é uma experiência audiovisual a partir do rico acervo da **[Universidade Popular de Arte e Ciência](http://upac.com.br?from=github-nuvela)**, o último grito em metanarrativa audiovisual, coletivo ritual com os melhores atores do mundo.
 
@@ -31,7 +31,16 @@ NUVELA é uma plataforma código livre, desenvolvida e mantida por:
 
 * `npm run watch`
 
+### utilização
+A Nuvela funciona de forma integrada ao Youtube e ao Google Drive. Comece criando uma tabela no Google Planilhas com o seguinte cabeçalho:
 
+videoid	; start	; end
+
+Nas linhas, preencha a primeira coluna com a ID do vídeo no youtube. No segundo e terceiro, a minutagem do início e do fim do trecho a ser exibido, sempre com dois cacteres no formato, tal como 00:51 ou 01:39.
+
+Depois de inserir os vídeos, tome nota do ID da sua da planilha e insira-o como valor da variável sheetId no arquivo player.js.
+
+Agora, basta abrir o index.html para assistir a sua NUVELA!
 
 [Adriano Belisário]: https://twitter.com/belisards
 [Marlus Araujo]: https://github.com/sulram
