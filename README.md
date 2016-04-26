@@ -36,7 +36,8 @@ A Nuvela funciona de forma integrada ao Youtube e ao Google Drive. Comece criand
 
 videoid	; start	; end
 
-Nas linhas, preencha a primeira coluna com a ID do vídeo no youtube. No segundo e terceiro, a minutagem do início e do fim do trecho a ser exibido, sempre com dois cacteres no formato, tal como 00:51 ou 01:39.
+Nas linhas, preencha a primeira coluna com a ID do vídeo no youtube. No segundo e terceiro, a minutagem do início e do fim do trecho a ser exibido, sempre com dois cacteres no formato, tal como 00:51 ou 01:39. Você também pode colocar campos extras para facilitar a organização dos vídeos, veja estão os organizados os vídeos atuais da Nuvela aqui: https://docs.google.com/spreadsheets/d/1vnzlSBVUoT9aARJzQPNosx3eTPhFJNKr3G_G3XDV-w8/edit?usp=sharing
+
 
 Depois de inserir os vídeos, tome nota do ID da sua da planilha e insira-o como valor da variável sheetId no arquivo player.js.
 
