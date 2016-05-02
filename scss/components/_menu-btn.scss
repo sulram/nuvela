@@ -1,0 +1,42 @@
+#menu-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: calc-responsive(2, 3) solid $white;
+  border-radius: 100%;
+  bottom: calc-responsive(20, 30);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  left: 50%;
+  line-height: 0;
+  outline: none;
+  padding: calc-responsive(11, 18);
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, 0);
+  z-index: 4;
+
+  &.close {
+    animation: close-btn 0.5s ease;
+    animation-fill-mode: forwards;
+
+    img {
+      animation: close-img 0.5s;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  &.more {
+    animation: more-btn 0.25s ease;
+    animation-fill-mode: forwards;
+
+    img {
+      animation: more-img 0.35s ease;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  img {
+    height: auto;
+    width: calc-responsive(14, 20);
+  }
+}

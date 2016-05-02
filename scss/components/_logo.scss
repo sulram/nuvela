@@ -1,0 +1,18 @@
+#logo {
+  position: absolute;
+  right: calc-responsive(10, 60);
+  top: calc-responsive(10, 60);
+  z-index: 3;
+  opacity: 0.6;
+  transition: opacity 0.4s ease;
+
+  &.opaque {
+    opacity: 1;
+  }
+
+  img {
+    display: block;
+    height: auto;
+    width: calc-responsive(32, 162);
+  }
+}

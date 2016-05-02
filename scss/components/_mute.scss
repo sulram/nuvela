@@ -1,0 +1,22 @@
+.mute {
+  background: none;
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+
+  &.mute-icon {
+    animation: mute-fadeout 0.5s 1s;
+    animation-fill-mode: forwards;
+    background: url($img-path + 'mute-icon.svg') no-repeat center center;
+    background-size: 450px 420px;
+  }
+
+  &.sound-icon {
+    animation: sound-fadeout 0.5s 1s;
+    animation-fill-mode: forwards;
+    background: url($img-path + 'sound-icon.svg') no-repeat center center;
+    background-size: 450px 420px;
+  }
+}
