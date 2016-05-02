@@ -108,7 +108,52 @@
         'onError': nextVideo
       }
     });
+
+    resizeAndRepositionVideo();
   }
+
+  // Redimencionar e reposicionar o player quando redimencionar o browser
+  $( window ).resize( resizeAndRepositionVideo );
+
+  // Evento de click no botão Menu
+  $( '#menu-btn' ).click(function() {
+    var menu = $( '#menu' );
+    var menuButton = $( '#menu-btn' );
+    var logo = $( '#logo' );
+
+    if ( showMenuFirstTime ) {
+      menu.addClass( 'active' );
+      menuButton.addClass( 'close' );
+      logo.addClass( 'opaque' );
+      showMenuFirstTime = false;
+      return;
+    }
+
+    menu.toggleClass( 'active inactive' );
+    menuButton.toggleClass( 'close more' );
+    logo.toggleClass( 'opaque' );
+  });
+
+  // Evento de click Mute
+  $( '.mute' ).click(function() {
+    if ( !$( '.nuvela-load' ).hasClass( 'hide' ) ) {
+      return;
+    }
+
+    var $this = $( this );
+
+    mute = !mute;
+
+    if ( mute ) {
+      player.mute();
+      $this.removeClass( 'sound-icon' );
+      $this.addClass( 'mute-icon' );
+    } else {
+      player.unMute();
+      $this.removeClass( 'mute-icon' );
+      $this.addClass( 'sound-icon' );
+    }
+  });
 
   // Play no vídeo quando for focus na tela
   function onFocus() {
@@ -216,44 +261,24 @@
     $( '#menu .nav .watch' ).attr( 'href', videoUrl );
   }
 
-  // Evento de click no botão Menu
-  $( '#menu-btn' ).click(function() {
-    var menu = $( '#menu' );
-    var menuButton = $( '#menu-btn' );
-    var logo = $( '#logo' );
+  // Redimencionar e reposicionar o player para ocupar a tela toda
+  function resizeAndRepositionVideo() {
+    var winH = $( window ).height();
+    var winW = $( window ).width();
+    var vidH = winH * ( 16 / 9 );
+    var vidW = winW * ( 9 / 16 );
+    var vidL = ( winW - vidH ) / 2;
+    var vidT = ( winH - vidW ) / 2;
 
-    if ( showMenuFirstTime ) {
-      menu.addClass( 'active' );
-      menuButton.addClass( 'close' );
-      logo.addClass( 'opaque' );
-      showMenuFirstTime = false;
-      return;
-    }
-
-    menu.toggleClass( 'active inactive' );
-    menuButton.toggleClass( 'close more' );
-    logo.toggleClass( 'opaque' );
-  });
-
-  // Evento de click Mute
-  $( '.mute' ).click(function() {
-    if ( !$( '.nuvela-load' ).hasClass( 'hide' ) ) {
-      return;
-    }
-
-    var $this = $( this );
-
-    mute = !mute;
-
-    if ( mute ) {
-      player.mute();
-      $this.removeClass( 'sound-icon' );
-      $this.addClass( 'mute-icon' );
+    if ( winW < vidH ) {
+      $( '#player' ).css( 'width', vidH );
+      $( '#player' ).css( 'height', winH );
+      $( '#player' ).css( 'left', vidL );
     } else {
-      player.unMute();
-      $this.removeClass( 'mute-icon' );
-      $this.addClass( 'sound-icon' );
+      $( '#player' ).css('width', winW);
+      $( '#player' ).css('height', vidW);
+      $( '#player' ).css('top',vidT);
     }
-  });
+  }
 
 })();
