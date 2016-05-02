@@ -274,10 +274,12 @@
       $( '#player' ).css( 'width', vidH );
       $( '#player' ).css( 'height', winH );
       $( '#player' ).css( 'left', vidL );
+      $( '#player' ).css( 'top', '' );
     } else {
       $( '#player' ).css('width', winW);
       $( '#player' ).css('height', vidW);
       $( '#player' ).css('top',vidT);
+      $( '#player' ).css( 'left', '' );
     }
   }
 
