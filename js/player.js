@@ -225,15 +225,33 @@
 
   // Converte o tempo no formato ...MM:SS em inteiro e tempo equivalente em segundos
   function toSecond( time ) {
-    var str = time.split( ':' )
+    var timeList = time.split( ':' );
+    var totalTime = 0;
+    var t = 0;
 
-    return ( parseInt(str[0]) * 60) + parseInt(str[1] );
+    for ( var i = timeList.length - 1; i >= 0; i-- ) {
+      totalTime += parseInt( timeList[i] ) * Math.pow( 60, t );
+
+      t++;
+    }
+
+    return totalTime;
   }
 
   function checkRegExp( time ) {
-    var rEx = /^\d+:[0-5]\d$/;
+    var timeList = time.split(':');
 
-    return rEx.test( time );
+    if ( timeList.length < 2 || timeList.length > 3 ) {
+      return false;
+    }
+
+    for ( var i = 0; i < timeList.length; i++ ) {
+      if ( parseInt( timeList[i] ) > 59 ) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   function shuffleList(list) {
