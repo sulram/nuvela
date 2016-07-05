@@ -1,6 +1,6 @@
 @keyframes show-menu {
   0% {
-    transform: translateY(200px);
+    transform: translateY(100%);
   }
   100% {
     transform: translateY(0);
@@ -12,7 +12,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(200px);
+    transform: translateY(100%);
   }
 }
 
