@@ -19,10 +19,11 @@
   var endOpening = false;
 
   // URL da planilha
-  var sheetId = '1vnzlSBVUoT9aARJzQPNosx3eTPhFJNKr3G_G3XDV-w8';
+  // var sheetId = '1vnzlSBVUoT9aARJzQPNosx3eTPhFJNKr3G_G3XDV-w8';
+  var sheetId = '1I2LKnw0Uq275VA21y0SWKEb8EkcokYLoHkEze5plRo8';
 
   // URL da planilha convertida em JSON
-  var sheetUrl = 'https://spreadsheets.google.com/feeds/list/' + sheetId + '/od6/public/values?alt=json';
+  var sheetUrl = 'https://spreadsheets.google.com/feeds/list/' + sheetId + '/1/public/values?alt=json';
 
   // Lista de videos
   var videoList = new Array();
@@ -78,7 +79,7 @@
     });
 
     // Embaralha a lista de vídeos validados vinda do Google Drive
-    shuffleList( videoList );
+    // shuffleList( videoList );
 
     doneList = true;
     setup();

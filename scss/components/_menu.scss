@@ -62,7 +62,7 @@
 
     li {
       &:first-child {
-        margin-right: 28px;
+        // margin-right: 28px;
       }
 
       a {
@@ -98,16 +98,12 @@
   }
 
 #nuvela-cc {
-  bottom: 18px;
+  margin: 20px auto;
   color: $white;
-  display: inline-block;
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
-  left: 50%;
-  position: absolute;
   text-shadow: 2px 2px 3px $black;
-  transform: translateX(-50%);
-
+  text-align: center;
   a,
   a:active,
   a:link,
