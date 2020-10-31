@@ -146,9 +146,7 @@
   $('.controls,#menu-btn').hide()
 
   $( '.big-play' ).click(function(e) {
-    player.playVideo()
-    $( '.big-play' ).fadeOut(1000).remove()
-    $('.controls,#menu-btn').fadeIn(1000)
+    firstPlay()
   })
 
   $( '.controls .play' ).click(function(e) {
@@ -200,6 +198,12 @@
     setup();
   }
 
+  function firstPlay() {
+    player.playVideo()
+    $( '.big-play' ).fadeOut(1000).remove()
+    $('.controls,#menu-btn').fadeIn(1000)
+  }
+
   function onStatChange() {
     /*
       Retorna o estado do player. Os valores possíveis são:
@@ -211,13 +215,19 @@
       5 – vídeo indicado
     */
     if ( player.getPlayerState() == YT.PlayerState.PLAYING ) {
+      
+      $('.big-play').length && firstPlay()
+
       interval = setInterval( playVid, 500 );
       setDataVideo();
+
       // Remover o load quando o vídeo for carregado
       $( '.nuvela-load' ).addClass( 'hide' );
       $( '#menu .title' ).removeClass( 'hidden' );
       $( '#main' ).addClass('playing')
+
       console.log('onStatChange','PLAYING')
+
     } else if ( player.getPlayerState() == YT.PlayerState.ENDED ) {
       // Chamar o próximo vídeo caso o vídeo atual chegue no fim
       nextVideo();
