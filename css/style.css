@@ -289,3 +289,9 @@ table {
         font-family: 'Roboto', sans-serif;
         font-size: 12px;
         font-weight: normal; }
+
+
+#chapter_next {
+  color: white;
+  margin: 2em 0;
+}

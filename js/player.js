@@ -11,6 +11,7 @@
   var player;
   var interval;
   var currentVid = 0;
+  var currentVidChapter = 0;
   var started = false;
   var showMenuFirstTime = true;
   var mute = false;
@@ -46,13 +47,14 @@
     var currentId;
     var currentStart;
     var currentEnd;
-    
+    var currentChapter;
     var qtyResults;
 
     $( entry ).each(function() {
       currentId = this.gsx$videoid.$t;
       currentStart = this.gsx$start.$t;
       currentEnd = this.gsx$end.$t;
+      currentChapter = this.gsx$chapter.$t;
 
       // Verifica se o ID do vídeo do YouTube não é 'null' e nem string vazia
       if ( currentId.length == 11 ) {
@@ -70,7 +72,8 @@
               videoList.push({
                 'id': currentId,
                 'start': currentStart,
-                'end': currentEnd
+                'end': currentEnd,
+                'chapter': Number(currentChapter)
               });
             }
           }
@@ -80,6 +83,8 @@
 
     // Embaralha a lista de vídeos validados vinda do Google Drive
     // shuffleList( videoList );
+
+    console.log('videoList',videoList)
 
     doneList = true;
     setup();
@@ -135,6 +140,11 @@
     logo.toggleClass( 'opaque' );
   });
 
+  $( '#chapter_next' ).click(function(e) {
+    e.preventDefault()
+    nextChapter()
+  })
+
   // Evento de click Mute
   $( '.mute' ).click(function() {
     if ( !$( '.nuvela-load' ).hasClass( 'hide' ) ) {
@@ -172,6 +182,15 @@
   }
 
   function onStatChange() {
+    /*
+      Retorna o estado do player. Os valores possíveis são:
+      -1 – não iniciado
+      0 – encerrado
+      1 – em reprodução
+      2 – em pausa
+      3 – armazenando em buffer
+      5 – vídeo indicado
+    */
     if ( player.getPlayerState() == YT.PlayerState.PLAYING ) {
       interval = setInterval( playVid, 500 );
 
@@ -180,11 +199,17 @@
       // Remover o load quando o vídeo for carregado
       $( '.nuvela-load' ).addClass( 'hide' );
       $( '#menu .title' ).removeClass( 'hidden' );
+      console.log('onStatChange','PLAYING')
     } else if ( player.getPlayerState() == YT.PlayerState.ENDED ) {
       // Chamar o próximo vídeo caso o vídeo atual chegue no fim
       nextVideo();
+      console.log('onStatChange','ENDED')
+    } else if ( player.getPlayerState() == 3 ) {
+      console.log('onStatChange','BUFFER')
+      setTimeout(()=>player.playVideo(),500)
     } else {
       clearInterval( interval );
+      console.log('onStatChange', 'ELSE', player.getPlayerState() )
     }
   }
 
@@ -201,10 +226,25 @@
     loadVid( videoList[currentVid].id, videoList[currentVid].start );
   }
 
+  function nextChapter() {
+    const index = R.findIndex(R.propEq('chapter', currentVidChapter+1), videoList)
+    console.log('nextChapter', currentVidChapter, currentVid, index)
+    if(index !== -1){
+      currentVid = index
+      loadVid( videoList[index].id, videoList[index].start )
+    } else {
+      currentVid = 0
+      loadVid( videoList[0].id, videoList[0].start )
+    }
+  }
+
   function loadVid( id, start ) {
     // Mostar o load toda vez que um video for carregado
     $( '.nuvela-load' ).removeClass( 'hide' );
     $( '#menu .title' ).addClass( 'hidden' );
+
+    currentVidChapter = videoList[currentVid].chapter
+    console.log('loadVid', currentVidChapter, currentVid)
 
     player.loadVideoById({
       videoId: id,
@@ -216,7 +256,7 @@
     // Se o player do YouTube, lista do Google Drive foram criadas e a Abertura acabou, play nos vídeos
     if ( doneYT && doneList && endOpening && !started ) {
       loadVid( videoList[currentVid].id, videoList[currentVid].start );
-
+      
       $(window).blur(onBlur);
       $(window).focus(onFocus);
 
