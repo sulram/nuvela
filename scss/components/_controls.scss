@@ -1,0 +1,50 @@
+.big-play {
+  background: url("../../assets/images/btn-play.svg") no-repeat center center;
+  background-size: 256px 256px;
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 9;
+  cursor: pointer;
+}
+
+.controls {
+  position: absolute;
+  bottom: calc(0.625vw + 18px);
+  left: 2vw;
+  z-index: 4;
+  transition: transform 0.5s;
+}
+
+&.menu-open .controls {
+  transform: translate(0, -140px);
+}
+
+.controls .btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: calc(0.0625vw + 1.8px) solid #ffffff;
+  border-radius: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 10px;
+  line-height: 0;
+  outline: none;
+  padding: calc(0.4375vw + 9.6px);
+  text-align: center;
+}
+
+.controls .btn img {
+  width: 16px;
+}
+
+.controls .pause {
+  display: none;
+}
+&.playing .controls .play {
+  display: none;
+}
+&.playing .controls .pause {
+  display: inline-block;
+}
