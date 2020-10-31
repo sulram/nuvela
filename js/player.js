@@ -234,6 +234,7 @@
       console.log('onStatChange','ENDED')
     } else if ( player.getPlayerState() == 2 ) {
       $( '#main' ).removeClass('playing')
+      console.log('onStatChange','PAUSED')
     } else if ( player.getPlayerState() == 3 ) {
       console.log('onStatChange','BUFFER')
     } else {
