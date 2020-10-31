@@ -6,8 +6,7 @@
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="btn-chapter" fill="#FFFFFF">
-            <polygon id="Triangle" transform="translate(12.664376, 16.000000) rotate(90.000000) translate(-12.664376, -16.000000) " points="12.6643765 11.3356235 19.6643765 20.6643765 5.66437649 20.6643765"></polygon>
-            <polygon id="Triangle-Copy" transform="translate(20.664376, 16.000000) rotate(90.000000) translate(-20.664376, -16.000000) " points="20.6643765 11.3356235 27.6643765 20.6643765 13.6643765 20.6643765"></polygon>
+            <path d="M15.9359252,17.0932135 L7.16437649,23.6751051 L7.16437649,8.32489492 L15.9359252,14.9067865 L15.9359252,8.32489492 L26.1643765,16 L15.9359252,23.6751051 L15.9359252,17.0932135 Z" id="Combined-Shape"></path>
         </g>
     </g>
 </svg>

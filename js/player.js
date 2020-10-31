@@ -123,6 +123,7 @@
 
   // Evento de click no botão Menu
   $( '#menu-btn' ).click(function() {
+    var main = $( '#main' );
     var menu = $( '#menu' );
     var menuButton = $( '#menu-btn' );
     var logo = $( '#logo' );
@@ -131,6 +132,7 @@
       menu.addClass( 'active' );
       menuButton.addClass( 'close' );
       logo.addClass( 'opaque' );
+      main.addClass( 'menu-open' );
       showMenuFirstTime = false;
       return;
     }
@@ -138,17 +140,28 @@
     menu.toggleClass( 'active inactive' );
     menuButton.toggleClass( 'close more' );
     logo.toggleClass( 'opaque' );
+    main.toggleClass( 'menu-open' );
   });
 
-  $( '#chapter_next' ).click(function(e) {
-    e.preventDefault()
-    nextChapter()
-  })
+  $('.controls,#menu-btn').hide()
 
   $( '.big-play' ).click(function(e) {
-    e.preventDefault()
     player.playVideo()
     $( '.big-play' ).fadeOut(1000).remove()
+    $('.controls,#menu-btn').fadeIn(1000)
+  })
+
+  $( '.controls .play' ).click(function(e) {
+    player.playVideo()
+  })
+
+  $( '.controls .pause' ).click(function(e) {
+    player.pauseVideo()
+  })
+
+  $( '.controls .next-chapter' ).click(function(e) {
+    e.preventDefault()
+    nextChapter()
   })
 
   // Evento de click Mute
@@ -203,11 +216,14 @@
       // Remover o load quando o vídeo for carregado
       $( '.nuvela-load' ).addClass( 'hide' );
       $( '#menu .title' ).removeClass( 'hidden' );
+      $( '#main' ).addClass('playing')
       console.log('onStatChange','PLAYING')
     } else if ( player.getPlayerState() == YT.PlayerState.ENDED ) {
       // Chamar o próximo vídeo caso o vídeo atual chegue no fim
       nextVideo();
       console.log('onStatChange','ENDED')
+    } else if ( player.getPlayerState() == 2 ) {
+      $( '#main' ).removeClass('playing')
     } else if ( player.getPlayerState() == 3 ) {
       console.log('onStatChange','BUFFER')
     } else {
