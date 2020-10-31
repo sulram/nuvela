@@ -145,6 +145,12 @@
     nextChapter()
   })
 
+  $( '.big-play' ).click(function(e) {
+    e.preventDefault()
+    player.playVideo()
+    $( '.big-play' ).fadeOut(1000).remove()
+  })
+
   // Evento de click Mute
   $( '.mute' ).click(function() {
     if ( !$( '.nuvela-load' ).hasClass( 'hide' ) ) {
@@ -193,9 +199,7 @@
     */
     if ( player.getPlayerState() == YT.PlayerState.PLAYING ) {
       interval = setInterval( playVid, 500 );
-
       setDataVideo();
-
       // Remover o load quando o vídeo for carregado
       $( '.nuvela-load' ).addClass( 'hide' );
       $( '#menu .title' ).removeClass( 'hidden' );
@@ -206,7 +210,6 @@
       console.log('onStatChange','ENDED')
     } else if ( player.getPlayerState() == 3 ) {
       console.log('onStatChange','BUFFER')
-      setTimeout(()=>player.playVideo(),500)
     } else {
       clearInterval( interval );
       console.log('onStatChange', 'ELSE', player.getPlayerState() )
@@ -215,7 +218,6 @@
 
   function playVid() {
     var currentTime = parseInt( player.getCurrentTime() );
-
     if ( currentTime >= videoList[currentVid].end ) {
       nextVideo();
     }
@@ -227,12 +229,16 @@
   }
 
   function nextChapter() {
+    // busca no array de videos
+    // o index do primeiro video do proximo capitulo
     const index = R.findIndex(R.propEq('chapter', currentVidChapter+1), videoList)
     console.log('nextChapter', currentVidChapter, currentVid, index)
     if(index !== -1){
+      // proximo capitulo
       currentVid = index
       loadVid( videoList[index].id, videoList[index].start )
     } else {
+      // volta pro primeiro video
       currentVid = 0
       loadVid( videoList[0].id, videoList[0].start )
     }
